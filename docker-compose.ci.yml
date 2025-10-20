@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  java-build:
+    image: maven:3.9.11-eclipse-temurin-17
+    working_dir: /workspace
+    command: ["mvn", "-B", "-DskipTests", "-f", "shared-common/pom.xml", "clean", "package"]
+    volumes:
+      - ./java-backend:/workspace
+      - ~/.m2:/root/.m2
+    environment:
+      - MAVEN_OPTS=-Dmaven.repo.local=/root/.m2/repository
+    # Exit status of this container represents build result
+    restart: "no"

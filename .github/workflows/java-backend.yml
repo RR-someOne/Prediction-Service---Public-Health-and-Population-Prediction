@@ -5,10 +5,20 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: java-backend-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ACT: ${{ github.actor == 'nektos/act' }}
     defaults:
       run:
         working-directory: java-backend
@@ -21,7 +31,12 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: 'maven'
+      - name: Install Maven (for local act)
+        if: ${{ github.actor == 'nektos/act' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y maven
       - name: Validate and compile (skip tests)
-        run: mvn -B -q -DskipTests verify
+        run: mvn -B -q -DskipTests -f shared-common/pom.xml clean verify
       - name: Run unit tests
-        run: mvn -B test
+        run: mvn -B -f shared-common/pom.xml test
