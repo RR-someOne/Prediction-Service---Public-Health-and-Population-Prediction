@@ -301,6 +301,8 @@
                     <configuration>
                         <format>ALL</format>
                         <failBuildOnCVSS>7</failBuildOnCVSS>
+                        <!-- Use env var if provided (set in CI as a secret) -->
+                        <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
                     </configuration>
                     <executions>
                         <execution>
@@ -315,6 +317,29 @@
 
         <plugins>
             <plugin>
+
+    <profiles>
+        <!-- Activate with -Powasp to run OWASP Dependency-Check -->
+        <profile>
+            <id>owasp</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <!-- Version and configuration inherit from pluginManagement -->
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>

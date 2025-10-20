@@ -1,10 +1,6 @@
-name: Java Backend CI
+name: OWASP Dependency Check
 
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
   workflow_dispatch:
   schedule:
     - cron: '0 3 * * 1' # Weekly Monday 03:00 UTC
@@ -13,14 +9,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: java-backend-${{ github.ref }}
+  group: owasp-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  dependency-check:
     runs-on: ubuntu-latest
-    env:
-      ACT: ${{ github.actor == 'nektos/act' }}
     defaults:
       run:
         working-directory: java-backend
@@ -38,7 +32,5 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y maven
-      - name: Validate and compile (skip tests)
-        run: mvn -B -q -DskipTests -f shared-common/pom.xml clean verify
-      - name: Run unit tests
-        run: mvn -B -f shared-common/pom.xml test
+      - name: Run OWASP Dependency Check (shared-common)
+        run: mvn -B -Powasp -DskipTests -f shared-common/pom.xml org.owasp:dependency-check-maven:check
