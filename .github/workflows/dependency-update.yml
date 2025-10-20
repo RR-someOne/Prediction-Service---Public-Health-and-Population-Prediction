@@ -1,0 +1,58 @@
+name: Dependency Update
+
+on:
+  schedule:
+    # Run every Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  dependency-update:
+    name: Update Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Update Maven dependencies
+        run: |
+          cd java-backend
+          ./mvnw versions:use-latest-releases
+          ./mvnw versions:update-properties
+
+      - name: Run tests after update
+        run: |
+          cd java-backend
+          ./mvnw clean test
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: update Maven dependencies'
+          title: 'Automated Maven Dependency Updates'
+          body: |
+            ## Automated Dependency Updates
+            
+            This PR contains automated updates to Maven dependencies.
+            
+            ### Changes
+            - Updated Maven dependencies to latest releases
+            - Updated Maven properties to latest versions
+            
+            ### Testing
+            - [x] All tests pass after updates
+            - [x] No breaking changes detected
+            
+            Please review the changes before merging.
+          branch: dependency-updates/maven
+          delete-branch: true
