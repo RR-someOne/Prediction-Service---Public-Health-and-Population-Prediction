@@ -1,0 +1,27 @@
+name: Java Backend CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: java-backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: 'maven'
+      - name: Validate and compile (skip tests)
+        run: mvn -B -q -DskipTests verify
+      - name: Run unit tests
+        run: mvn -B test
