@@ -28,11 +28,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up JDK 17
+        if: ${{ github.actor != 'nektos/act' }}
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
           cache: 'maven'
+      - name: Install JDK 17 (for local act)
+        if: ${{ github.actor == 'nektos/act' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openjdk-17-jdk
+          java -version
       - name: Install Maven (for local act)
         if: ${{ github.actor == 'nektos/act' }}
         run: |
