@@ -24,11 +24,7 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- Spring Boot Starter Web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+        <!-- Note: No web starter here to keep this library free of server dependencies -->
 
         <!-- Spring Boot Starter Data JPA -->
         <dependency>
