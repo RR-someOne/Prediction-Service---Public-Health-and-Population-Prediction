@@ -2,7 +2,7 @@
 
 This repository includes comprehensive GitHub Actions workflows for continuous integration and deployment of the Java Spring Boot microservices.
 
-## 🔧 Workflows Overview
+## Workflows Overview
 
 ### 1. CI/CD Pipeline (`ci-cd.yml`)
 **Triggers:** Push to main/develop, Pull Requests
@@ -41,7 +41,7 @@ This repository includes comprehensive GitHub Actions workflows for continuous i
 - **Code Review:** SonarCloud integration, PMD analysis
 - **Automated Comments:** Quality metrics reporting
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### Required GitHub Secrets
 
@@ -83,7 +83,7 @@ SONAR_TOKEN          # SonarCloud token for code quality
      - `staging` (auto-deploy from main)
      - `production` (manual approval required)
 
-## 📋 Workflow Features
+## Workflow Features
 
 ### Matrix Builds
 All 9 microservices are built in parallel:
@@ -138,7 +138,7 @@ Add these badges to your README:
 [![codecov](https://codecov.io/gh/RR-someOne/Prediction-Service---Public-Health-and-Population-Prediction/branch/main/graph/badge.svg)](https://codecov.io/gh/RR-someOne/Prediction-Service---Public-Health-and-Population-Prediction)
 ```
 
-## 🛠 Customization
+## Customization
 
 ### Adding New Services
 1. Add service name to the matrix in `ci-cd.yml`
@@ -157,7 +157,7 @@ Configure in `java-backend/gatling.conf`:
 - Throughput requirements
 - Error rate thresholds
 
-## 🚨 Troubleshooting
+### Troubleshooting
 
 ### Common Issues
 
@@ -185,7 +185,7 @@ Configure in `java-backend/gatling.conf`:
 - Review artifact downloads for detailed reports
 - Enable debug logging: `ACTIONS_STEP_DEBUG: true`
 
-## 🎯 Best Practices
+##  Best Practices
 
 1. **Keep workflows fast** - Use caching and parallel jobs
 2. **Fail fast** - Run quick checks before expensive operations
