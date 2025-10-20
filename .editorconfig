@@ -31,3 +31,8 @@ indent_size = 4
 
 [*.{sh,bash}]
 indent_size = 2
+
+[*.py]
+indent_size = 4
+# Keep in sync with Black and Ruff configs
+max_line_length = 88

@@ -1,4 +1,5 @@
 {
+    "editor.formatOnSave": true,
     "java.configuration.updateBuildConfiguration": "interactive",
     "java.configuration.runtimes": [
         {
@@ -6,5 +7,19 @@
             "path": "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home",
             "default": true
         }
-    ]
+    ],
+        "[python]": {
+            "editor.defaultFormatter": "ms-python.python",
+            "editor.codeActionsOnSave": {
+                "source.organizeImports": "explicit"
+            }
+        },
+        "python.formatting.provider": "black",
+        "python.formatting.blackArgs": ["--line-length", "88"],
+    "ruff.lint.enable": true,
+    "ruff.fixOnSave": true,
+    "ruff.organizeImports": true,
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    }
 }
