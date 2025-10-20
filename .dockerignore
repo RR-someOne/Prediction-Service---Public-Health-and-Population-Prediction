@@ -1,0 +1,52 @@
+# Docker ignore file for Spring Boot microservices
+
+# Build artifacts
+target/
+build/
+*.jar
+*.war
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+docs/
+
+# CI/CD
+.github/
+Jenkinsfile
+*.yml
+*.yaml
+
+# Local configuration
+application-local.properties
+.env.local
+
+# Node modules (if frontend exists)
+node_modules/
+
+# Python cache (if any Python scripts)
+__pycache__/
+*.pyc
