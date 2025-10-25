@@ -60,16 +60,15 @@ jobs:
     strategy:
       matrix:
         service: [
-          'shared-common'
-          # Other services will be added when their pom.xml files are created
-          # , 'eureka-server'
-          # , 'api-gateway'
-          # , 'config-server'
-          # , 'population-health-trends'
-          # , 'disease-outbreak-modeling'
-          # , 'demographic-forecasting'
-          # , 'resource-planning'
-          # , 'risk-assessment'
+          'shared-common',
+          'eureka-server',
+          'api-gateway',
+          'config-server',
+          'population-health-trends',
+          'disease-outbreak-modeling',
+          'demographic-forecasting',
+          'resource-planning',
+          'risk-assessment'
         ]
     steps:
       - name: Checkout code
