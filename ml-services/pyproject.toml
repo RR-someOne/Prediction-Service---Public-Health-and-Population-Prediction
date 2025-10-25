@@ -2,13 +2,15 @@
 line-length = 88
 target-version = ["py38", "py39", "py310", "py311", "py312"]
 include = "\\.pyi?$"
-exclude = [
-  "build/",
-  "dist/",
-  "\.venv/",
-  "\.mypy_cache/",
-  "\.pytest_cache/"
-]
+exclude = '''
+/(
+    build/
+    | dist/
+    | \.venv/
+    | \.mypy_cache/
+    | \.pytest_cache/
+)/
+'''
 
 [tool.isort]
 profile = "black"
