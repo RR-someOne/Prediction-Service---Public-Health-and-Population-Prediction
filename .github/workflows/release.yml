@@ -1,9 +1,11 @@
 name: Release
 
+# Temporarily disabled until services are implemented
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  workflow_dispatch:  # Manual trigger only
+  # push:
+  #   branches: [main]
+  #   tags: ['v*']
 
 env:
   JAVA_VERSION: '21'
@@ -73,6 +75,8 @@ jobs:
     name: Build Release Images
     runs-on: ubuntu-latest
     needs: create-release
+    # Temporarily disabled until service pom.xml files are created
+    if: false
     strategy:
       matrix:
         service: [
@@ -129,7 +133,9 @@ jobs:
   deploy-production:
     name: Deploy to Production
     runs-on: ubuntu-latest
-    needs: build-release-images
+    needs: create-release  # Changed from build-release-images since it's disabled
+    # Temporarily disabled until deployment infrastructure is set up
+    if: false
     environment:
       name: production
       url: https://prediction-service.com

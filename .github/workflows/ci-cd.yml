@@ -1,10 +1,12 @@
 name: CI/CD Pipeline - Java Microservices
 
+# Temporarily disabled until all services are implemented
 on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main, develop ]
+  workflow_dispatch:  # Manual trigger only
+  # push:
+  #   branches: [ main, develop ]
+  # pull_request:
+  #   branches: [ main, develop ]
 
 env:
   JAVA_VERSION: '21'
