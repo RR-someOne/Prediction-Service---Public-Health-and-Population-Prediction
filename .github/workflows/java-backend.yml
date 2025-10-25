@@ -27,24 +27,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         if: ${{ github.actor != 'nektos/act' }}
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '21'
           cache: 'maven'
-      - name: Install JDK 17 (for local act)
+      - name: Install JDK 21 (for local act)
         if: ${{ github.actor == 'nektos/act' }}
         run: |
           sudo apt-get update
-          sudo apt-get install -y openjdk-17-jdk
-          # Point environment to JDK 17
-          echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> "$GITHUB_ENV"
-          echo "/usr/lib/jvm/java-17-openjdk-amd64/bin" >> "$GITHUB_PATH"
-          # Switch default java to 17 in the container
+          sudo apt-get install -y openjdk-21-jdk
+          # Point environment to JDK 21
+          echo "JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64" >> "$GITHUB_ENV"
+          echo "/usr/lib/jvm/java-21-openjdk-amd64/bin" >> "$GITHUB_PATH"
+          # Switch default java to 21 in the container
           if command -v update-alternatives >/dev/null 2>&1; then
-            sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java || true
+            sudo update-alternatives --set java /usr/lib/jvm/java-21-openjdk-amd64/bin/java || true
           fi
           java -version
       - name: Install Maven (for local act)

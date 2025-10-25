@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   java-build:
-    image: maven:3.9.11-eclipse-temurin-17
+    image: maven:3.9.11-eclipse-temurin-21
     working_dir: /workspace
     command: ["mvn", "-B", "-DskipTests", "-f", "shared-common/pom.xml", "clean", "package"]
     volumes:

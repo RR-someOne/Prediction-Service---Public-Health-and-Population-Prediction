@@ -15,9 +15,9 @@
 
     <properties>
         <!-- Java version -->
-        <maven.compiler.release>17</maven.compiler.release>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
         <!-- Spring Boot and Cloud versions -->
@@ -49,6 +49,8 @@
 
     <modules>
         <module>shared-common</module>
+        <!-- Other modules will be added once their pom.xml files are created -->
+        <!-- 
         <module>eureka-server</module>
         <module>api-gateway</module>
         <module>config-server</module>
@@ -57,6 +59,7 @@
         <module>demographic-forecasting</module>
         <module>resource-planning</module>
         <module>risk-assessment</module>
+        -->
     </modules>
 
     <dependencyManagement>
@@ -204,7 +207,7 @@
                     </configuration>
                 </plugin>
 
-                <!-- Maven Enforcer Plugin to require Java 17+ -->
+                <!-- Maven Enforcer Plugin to require Java 21+ -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
@@ -218,8 +221,8 @@
                             <configuration>
                                 <rules>
                                     <requireJavaVersion>
-                                        <version>[17,)</version>
-                                        <message>This project requires JDK 17 or newer. Please install JDK 17 and set JAVA_HOME accordingly.</message>
+                                        <version>[21,)</version>
+                                        <message>This project requires JDK 21 or newer. Please install JDK 21 and set JAVA_HOME accordingly.</message>
                                     </requireJavaVersion>
                                 </rules>
                                 <fail>true</fail>
