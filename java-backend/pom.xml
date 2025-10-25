@@ -48,7 +48,8 @@
     </properties>
 
     <modules>
-        <module>shared-common</module>
+    <module>shared-common</module>
+    <module>population-health-trends</module>
         <!-- Other modules will be added once their pom.xml files are created -->
         <!-- 
         <module>eureka-server</module>
@@ -64,6 +65,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Jackson for JSON parsing -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.16.0</version>
+            </dependency>
+
             <!-- Spring Boot BOM -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -120,6 +128,12 @@
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
                 <scope>test</scope>
             </dependency>
             
