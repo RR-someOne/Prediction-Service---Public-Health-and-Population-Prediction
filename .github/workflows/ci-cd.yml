@@ -208,19 +208,19 @@ jobs:
     needs: [security-scan, integration-tests]
     # Temporarily disabled until service pom.xml and Dockerfiles are created
     if: false && github.event_name == 'push' && github.ref == 'refs/heads/main'
-    strategy:
-      matrix:
-        service: [
-          # Services will be added when their pom.xml and Dockerfiles are created
-          # 'eureka-server'
-          # , 'api-gateway'
-          # , 'config-server'
-          # , 'population-health-trends'
-          # , 'disease-outbreak-modeling'
-          # , 'demographic-forecasting'
-          # , 'resource-planning'
-          # , 'risk-assessment'
-        ]
+    # strategy:
+    #   matrix:
+    #     service: [
+    #       # Services will be added when their pom.xml and Dockerfiles are created
+    #       # 'eureka-server'
+    #       # , 'api-gateway'
+    #       # , 'config-server'
+    #       # , 'population-health-trends'
+    #       # , 'disease-outbreak-modeling'
+    #       # , 'demographic-forecasting'
+    #       # , 'resource-planning'
+    #       # , 'risk-assessment'
+    #     ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -366,7 +366,34 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          channel: '#ci-cd'
-          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      # - name: Build JAR for ${{ matrix.service }}
+      #   run: |
+      #     cd java-backend
+      #     ./mvnw clean package -pl ${{ matrix.service }} -am -DskipTests
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v3
+      # - name: Log in to Container Registry
+      #   uses: docker/login-action@v3
+      #   with:
+      #     registry: ${{ env.REGISTRY }}
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Extract metadata
+      #   id: meta
+      #   uses: docker/metadata-action@v5
+      #   with:
+      #     images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.service }}
+      #     tags: |
+      #       type=ref,event=branch
+      #       type=ref,event=pr
+      #       type=sha,prefix={{branch}}-
+      #       type=raw,value=latest,enable={{is_default_branch}}
+      # - name: Build and push Docker image
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: java-backend/${{ matrix.service }}
+      #     push: true
+      #     tags: ${{ steps.meta.outputs.tags }}
+      #     labels: ${{ steps.meta.outputs.labels }}
+      #     cache-from: type=gha
+      #     cache-to: type=gha,mode=max
