@@ -51,8 +51,8 @@ jobs:
           ./mvnw package -DskipTests
 
       - name: Upload build artifacts
+        if: ${{ github.actor != 'nektos/act' }}
         uses: actions/upload-artifact@v4
-        if: success()
         with:
           name: java-artifacts
           path: |
@@ -115,8 +115,8 @@ jobs:
         continue-on-error: true
 
       - name: Upload OWASP report
+        if: ${{ github.actor != 'nektos/act' }}
         uses: actions/upload-artifact@v4
-        if: always()
         with:
           name: owasp-dependency-check-report
           path: java-backend/target/dependency-check-report.html

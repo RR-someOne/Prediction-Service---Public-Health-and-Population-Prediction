@@ -108,8 +108,8 @@ jobs:
           fail-on-error: true
 
       - name: Upload test results
+        if: ${{ github.actor != 'nektos/act' }}
         uses: actions/upload-artifact@v4
-        if: always()
         with:
           name: test-results-${{ matrix.service }}
           path: java-backend/${{ matrix.service }}/target/surefire-reports/
@@ -136,8 +136,8 @@ jobs:
           ./mvnw org.owasp:dependency-check-maven:check
 
       - name: Upload OWASP report
+        if: ${{ github.actor != 'nektos/act' }}
         uses: actions/upload-artifact@v4
-        if: always()
         with:
           name: owasp-report
           path: java-backend/target/dependency-check-report.html
@@ -297,6 +297,7 @@ jobs:
           ./mvnw clean verify jacoco:report
 
       - name: Upload coverage to Codecov
+        if: ${{ github.actor != 'nektos/act' }}
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -328,8 +329,8 @@ jobs:
           ./mvnw gatling:test -Dgatling.simulationClass=LoadTestSimulation
 
       - name: Upload performance test results
+        if: ${{ github.actor != 'nektos/act' }}
         uses: actions/upload-artifact@v4
-        if: always()
         with:
           name: performance-test-results
           path: java-backend/target/gatling/

@@ -21,8 +21,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
         <!-- Spring Boot and Cloud versions -->
-    <spring.boot.version>3.3.5</spring.boot.version>
-    <spring.cloud.version>2023.0.4</spring.cloud.version>
+        <spring.boot.version>3.3.5</spring.boot.version>
+        <spring.cloud.version>2023.0.4</spring.cloud.version>
         
         <!-- Database versions -->
         <postgresql.version>42.6.0</postgresql.version>
@@ -48,9 +48,10 @@
     </properties>
 
     <modules>
-    <module>shared-common</module>
-    <module>population-health-trends</module>
-        <!-- Other modules will be added once their pom.xml files are created -->
+        <module>shared-common</module>
+        <module>population-health-trends</module>
+        <!-- Other modules will be added once their 
+        files are created -->
         <!-- 
         <module>eureka-server</module>
         <module>api-gateway</module>
@@ -301,7 +302,7 @@
                     <version>${checkstyle.maven.plugin.version}</version>
                     <configuration>
                         <!-- Use config file located in java-backend/checkstyle.xml -->
-                        <configLocation>${project.parent.basedir}/checkstyle.xml</configLocation>
+                        <configLocation>checkstyle.xml</configLocation>
                         <encoding>UTF-8</encoding>
                         <consoleOutput>true</consoleOutput>
                         <failsOnError>false</failsOnError>
@@ -338,7 +339,6 @@
                         <effort>Max</effort>
                         <threshold>Low</threshold>
                         <failOnError>true</failOnError>
-                        <excludeFilterFile>spotbugs-exclude.xml</excludeFilterFile>
                     </configuration>
                     <executions>
                         <execution>

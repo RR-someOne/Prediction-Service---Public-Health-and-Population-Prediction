@@ -41,8 +41,8 @@ jobs:
           ./mvnw org.owasp:dependency-check-maven:check
 
       - name: Upload OWASP report
+        if: ${{ github.actor != 'nektos/act' }}
         uses: actions/upload-artifact@v4
-        if: always()
         with:
           name: owasp-dependency-check-report
           path: java-backend/target/dependency-check-report.html
@@ -56,8 +56,8 @@ jobs:
           args: --severity-threshold=high --file=java-backend/pom.xml
 
       - name: Upload Snyk results to GitHub Code Scanning
+        if: ${{ github.actor != 'nektos/act' }}
         uses: github/codeql-action/upload-sarif@v3
-        if: always()
         continue-on-error: true
         with:
           sarif_file: snyk.sarif
@@ -143,8 +143,8 @@ jobs:
           output: 'trivy-results-${{ matrix.service }}.sarif'
 
       - name: Upload Trivy scan results to GitHub Security tab
+        if: ${{ github.actor != 'nektos/act' }}
         uses: github/codeql-action/upload-sarif@v3
-        if: always()
         continue-on-error: true
         with:
           sarif_file: 'trivy-results-${{ matrix.service }}.sarif'
